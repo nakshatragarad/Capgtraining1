@@ -1,0 +1,33 @@
+create or replace table airways1(
+ 
+  "Sr" integer,
+  "airline" varchar(30),
+  "flight" varchar(30),
+  "source-city" varchar(30),
+  "Departure-time" varchar(30),
+  "stops" varchar(256),
+  "arrival-time" varchar(256),
+  "destination-city" varchar(256),
+  "class" varchar(256),
+  "Duration" float,
+  "days-left" integer,
+  "Price" integer
+  
+)
+select * from airways1;
+
+--which airline have maximum fights in the morning and Early_morning
+select max("airline") from airways1 where "arrival-time"='Morning' or "arrival-time"='Early_Morning';
+
+--does the flights with one and more than one stops have less price compared to flights with zero stops
+select avg("Price") from airways1 where "stops"='zero';
+select avg("Price") from airways1 where "stops"!='zero';
+
+--Average travel duration for flights with one and more than one stops
+select avg("Duration") from airways1 where "stops"!='zero';
+
+--Which airlines makes highest selling for Afternoon flights
+select max("airline") from airways1 where "arrival-time"='Afternoon';
+
+--which source||destination flight fare is less
+select "source-city","destination-city" from airways1 where "Price"=(select min("Price") from airways1);
